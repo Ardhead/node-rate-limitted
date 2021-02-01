@@ -1,13 +1,13 @@
 const validator = require('./validator');
 
 class MainValidator {
-  checkRateLimit(req, res, next) {
+  async checkRateLimit(req, res, next) {
     try {
-      validator.checkRateLimit(req);
+      await validator.checkRateLimit(req);
       next();
     } catch (errorObject) {
       console.error('Error while validating test request', errorObject);
-      res.status(429).send('limit reached!');
+      res.status(errorObject.code).send(errorObject.message);
     }
   }
 }

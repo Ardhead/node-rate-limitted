@@ -6,7 +6,7 @@ const { routesConstants } = require('../constants');
 class Test extends Base {
   constructor() {
     super();
-    // this.get(routesConstants.main, validator.checkRateLimit, controller.returnData);
+    this.get(routesConstants.main, validator.checkRateLimit, controller.returnData);
   }
 }
 
