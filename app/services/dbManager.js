@@ -8,34 +8,46 @@ class DBManager {
 
   async connect() {
     try {
-      this.client = await MongoClient.connect(dbConstants.url, {});
+      this.client = await MongoClient.connect(dbConstants.url, {useUnifiedTopology: true});
     } catch (err) {
       console.error('Error while connecting to database', err);
       throw err;
     }
   }
 
-  destroy() {
-    this.client.close();
+  async createCollection(collection) {
+    return this.client.db(dbConstants.dbName).createCollection(collection);
+  }
+  
+  async listDatabases() {
+    return this.client.db().admin().listDatabases()
+  }
+  
+  async listCollections() {
+    return this.client.db(dbConstants.dbName).listCollections()
   }
 
-  createCollection(collection) {
+  async destroy() {
+    return this.client.close();
+  }
+
+  async createCollection(collection) {
     return this.client.db(dbConstants.dbName).createCollection(collection);
   }
 
-  dropCollection(collection) {
+  async dropCollection(collection) {
     return this.client.db(dbConstants.dbName).collection(collection).drop();
   }
 
-  insertOne(collection, document) {
+  async insertOne(collection, document) {
     return this.client.db(dbConstants.dbName).collection(collection).insertOne(document);
   }
 
-  updateOne(collection, document) {
+  async updateOne(collection, document) {
     return this.client.db(this.dbName).collection(collection).updateOne(document);
   }
 
-  findOne(collection, query, options = {}) {
+  async findOne(collection, query, options = {}) {
     return this.client.db(this.dbName).collection(collection).findOne(query, options);
   }
 }

@@ -1,4 +1,4 @@
-const dbManager = require('../../servises/dbManager');
+const dbManager = require('../../services/dbManager');
 const { dbConstants } = require('../../constants');
 
 class Validator {

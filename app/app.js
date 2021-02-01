@@ -1,8 +1,10 @@
 const https = require('https');
 const express = require('express');
 const bodyParser = require('body-parser');
-const Routes = require('./routes');
+const Routes = require('./routes/index');
+const { initialize } = require('./scheduler');
 
+initialize();
 const app = express();
 
 const server = https.createServer(app);
@@ -13,7 +15,7 @@ app.use(bodyParser.json({
   limit: '100mb',
 }));
 
-app.use(express.static('./public/dist'));
+// app.use(express.static('./public/dist'));
 app.use('/', new Routes());
 
 server.listen(port, (err) => {

@@ -1,4 +1,4 @@
-const dbServise = require('../servises/dbServise');
+const dbServise = require('../services/dbManager');
 const { httpConstants, errorConstants } = require('../constants');
 
 class Global {
