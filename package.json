@@ -4,7 +4,8 @@
   "author": "Aleksandr Shevtsov",
   "private": false,
   "scripts": {
-    "start": "node app/app.js"
+    "start": "node app/app.js",
+    "init": "sh init.sh"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
